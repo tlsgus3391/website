@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+  <title>WEB1 - HTML</title>
+  <meta charset="utf-8">
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+        <style media="screen">
+      *{
+        margin: 0; padding: 0;
+      }
+      .slide{
+        width: 250px;
+        height: 1500px;
+        overflow: hidden;
+        position: absolute;
+        left:1600px;
+        top:150px;
+        margin: 0 auto;
+      }
+      .slide ul{
+        width: 50000px;
+        position: absolute;
+        top:0;
+        left:0;
+        font-size: 0;
+      }
+      .slide ul li{
+        display: inline-block;
+      }
+      #back{
+        position: absolute;
+        top: 400px;
+        left: 0;
+        cursor: pointer;
+        z-index: 1;
+      }
+      #next{
+        position: absolute;
+        top: 400px;
+        right: 0;
+        cursor: pointer;
+        z-index: 1;
+      }
+     </style>
+<script language="javascript">
+var delay=10; //시간설정
+var correctAnswers=new Array("a","b","a","b","b");  //정답
+
+var q_num=1;
+var timer;
+var layer;
+var clock=delay;
+var score=0;
+
+function show_question(){
+	if (layer=eval("document.all.question"+q_num)){
+		layer.style.display="inline";
+		document.all.timeLeft.innerHTML=clock;
+		hide_question();
+	} else {
+		document.all.timeLeft.innerHTML=0;
+		document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다.";
+		document.all.quizScore.style.display="inline";
+	}
+}
+
+function hide_question(){
+	if (clock>0) {
+		document.all.timeLeft.innerHTML=clock;
+		clock--;
+		timer=setTimeout("hide_question()",1000);
+	} else {
+		clearTimeout(timer);
+		document.all.answerBoard.innerHTML=" ";
+		clock=delay;
+		layer.style.display="none";
+		q_num++;
+		show_question();
+	}
+}
+
+function check_answer(answer){
+	if (correctAnswers[q_num-1]==answer){
+		score++;
+		document.all.answerBoard.innerHTML="<font color=blue><b>정답입니다.</b></font>";
+	} else {
+		document.all.answerBoard.innerHTML="<font color=red><b>땡! 틀렸습니다.</b></font>";
+	}
+	clock=0;
+	clearTimeout(timer);
+	timer=setTimeout("hide_question()",700);
+}
+
+window.onload=show_question;
+</script>
+</head>
+<body>
+  <h1><a href="index.html">Healthy Life</a></h1>
+  <div id="grid">
+    <ul>
+      <li><a href="1.html">가슴운동</a></li>
+      <li><a href="2.html">어깨운동</a></li>
+      <li><a href="3.html">하체운동</a></li>
+      <li><a href="4.html">Quiz</a></li>
+    </ul>
+    <div id="article">
+  <h2><br></h2>
+  제한시간 : <B><span id="timeLeft"></span></B> 초<br>
+<br>
+<div id="answerBoard"> </div>
+<br>
+
+<div id="question1" style="display:none">
+	<b>1. 운동 후, 근육통증은 당연하다.</b><br><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')">a) 맞다</a><br>
+	<a href="javascript:void(0)" onclick="check_answer('b')">b) 아니다</a><br>
+</div>
+
+<div id="question2" style="display:none">
+<b>2. 근육통증은 운동으로 풀어야한다.</b><br><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 맞다</a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 아니다</a><br>
+</div>
+
+<div id="question3" style="display:none">
+<b>3. 팔다리가 얇아지려면, 들수있는 무게보다 무겁게 들어야한다.</b><br><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 맞다</a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 아니다</a><br>
+</div>
+
+<div id="question4" style="display:none">
+<b>4. 근육이 발달하면 기초대사량도 늘어난다.</b><br><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 맞다</a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 아니다</a><br>
+</div>
+
+<div id="question5" style="display:none">
+<b>5. 운동 중 수시로 물을 마시면 좋다.</b><br><br>
+<a href="javascript:void(0)" onclick="check_answer('a')">a) 맞다</a><br>
+<a href="javascript:void(0)" onclick="check_answer('b')">b) 아니다</a><br>
+</div>
+
+<div id="quizScore" style="display:none">
+</div>
+        </div>
+  </div>
+            <div class="slide">
+      <img id="back" src="back.png" alt="" width="20">
+      <ul>
+        <li>
+          <a href="https://www.myprotein.co.kr/nutrition/protein/whey-protein.list?affil=mpppc">
+              <img src="pro.jpg" alt="" width="250" height="800">
+          </a></li>
+        <li><img src="55d26e6004e2441c9aa14f629ea257c9.jpg" alt="" width="250" height="800"></li>
+        <li><img src="2015110412308011431_1.jpg" alt="" width="250" height="800"></li>
+        <li><img src="i15116932752.jpg" alt="" width="250" height="800"></li>
+      </ul>
+      <img id="next" src="next.png" alt="" width="20">
+    </div>
+</body>
+          <script type="text/javascript">
+    $(document).ready(function(){
+      var imgs;
+      var img_count;
+      var img_position = 1;
+
+      imgs = $(".slide ul");
+      img_count = imgs.children().length;
+
+      //버튼을 클릭했을 때 함수 실행
+      $('#back').click(function () {
+        back();
+      });
+      $('#next').click(function () {
+        next();
+      });
+
+      function back() {
+        if(1<img_position){
+          imgs.animate({
+            left:'+=260px'
+          });
+          img_position--;
+        }
+      }
+      function next() {
+        if(img_count>img_position){
+          imgs.animate({
+            left:'-=260px'
+          });
+          img_position++;
+        }
+      }
+
+
+      //이미지 끝까지 가면 버튼 사라지기
+
+
+      //첫 이미지로 돌아오기
+
+
+    });
+  </script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>circle move</title>
+<style>
+    body{
+        background-color:whitesmoke;
+    }
+</style>
+<script src="http://code.createjs.com/createjs-2013.09.25.min.js"></script>
+<script>
+	var stage;
+	var circle;
+	var bitmap;
+	
+	function init () {
+	//Create a stage by getting a reference to the canvas
+    stage = new createjs.Stage("canvas");
+    //Create a Shape DisplayObject.
+	
+	bitmap = new createjs.Bitmap("4.jpg");
+	stage.addChild(bitmap);
+	
+    circle = new createjs.Shape().set({x:50, y:50});
+	//circle.graphics.beginFill("red").drawCircle(0, 0, 100);
+	circle.graphics.setStrokeStyle(5).beginStroke("rgba(150,50,0,1)").drawCircle(10, 10, 150);
+	//circle.cache(-50, -50, 100, 100);
+	bitmap.mask = circle;
+	stage.addChild(bitmap);
+	stage.addChild(circle);
+    //Update stage will render next frame
+    stage.update();
+		
+	createjs.Ticker.setFPS(60);
+	//Update stage will render next frame
+    createjs.Ticker.addEventListener("tick", handleTick);
+    createjs.Tween.get(circle, {loop:true}).to({x:1000, y:500 , scaleX:4, scaleY:4} , 3000 ).to({ x:50, y:50 ,scaleX:1, scaleY:1} ,3000);
+   }
+
+    function handleTick() {			
+	//circle.x = circle.x + 2;
+    stage.update();
+	}   
+</script>
+
+</head>
+
+<body onload="init()" >
+ <canvas id="canvas" width="1700" height="900" ></canvas>
+    <a href="index.html" title="Healthy Life" style="display:block; width:300px; color: dimgray; font-size:15px; font-weight: bold; text-decoration:none; text-align: right">
+    Which body do you want to be?<br>
+    Go to Main Page
+    </a>
+</body>
+</html>
